@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Content extends Model
@@ -47,5 +48,10 @@ class Content extends Model
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'content_genre');
+    }
+
+    public function videoAssets(): HasMany
+    {
+        return $this->hasMany(VideoAsset::class);
     }
 }

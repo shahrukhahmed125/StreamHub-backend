@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Content\IndexContentController;
 use App\Http\Controllers\Api\V1\Content\ShowContentController;
 use App\Http\Controllers\Api\V1\Genre\IndexGenreController;
 use App\Http\Controllers\Api\V1\HealthController;
+use App\Http\Controllers\Api\V1\Playback\ShowPlaybackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
 Route::get('/v1/contents', IndexContentController::class);
 Route::get('/v1/contents/{slug}', ShowContentController::class);
 Route::get('/v1/genres', IndexGenreController::class);
+Route::get(
+    '/v1/contents/{slug}/playback',
+    ShowPlaybackController::class,
+);
