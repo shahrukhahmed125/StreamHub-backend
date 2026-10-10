@@ -16,6 +16,7 @@ class ContentRepository implements ContentRepositoryInterface
         int $perPage = 20,
     ): LengthAwarePaginator {
         $query = Content::query()
+            ->with('genres')
             ->where('status', 'published')
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
@@ -28,6 +29,12 @@ class ContentRepository implements ContentRepositoryInterface
             $query->where('title', 'like', '%'.$filters['search'].'%');
         }
 
+        if (isset($filters['genre'])) {
+            $query->whereHas('genres', function ($genreQuery) use ($filters): void {
+                $genreQuery->where('slug', $filters['genre']);
+            });
+        }
+
         return $query
             ->orderByDesc('published_at')
             ->orderByDesc('id')
@@ -37,6 +44,7 @@ class ContentRepository implements ContentRepositoryInterface
     public function findPublishedBySlug(string $slug): ?Content
     {
         return Content::query()
+            ->with('genres')
             ->where('status', 'published')
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())

@@ -18,6 +18,7 @@ class ContentResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'title' => $this->title,
+            'genres' => GenreResource::collection($this->whenLoaded('genres')),
             'slug' => $this->slug,
             'description' => $this->description,
             'release_date' => $this->release_date?->toDateString(),

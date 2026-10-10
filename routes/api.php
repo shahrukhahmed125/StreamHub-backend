@@ -5,6 +5,9 @@ use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\MeController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Auth\UpdateProfileController;
+use App\Http\Controllers\Api\V1\Content\IndexContentController;
+use App\Http\Controllers\Api\V1\Content\ShowContentController;
+use App\Http\Controllers\Api\V1\Genre\IndexGenreController;
 use App\Http\Controllers\Api\V1\HealthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +27,9 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/v1/auth/me', MeController::class);
 
     Route::patch('/v1/auth/profile', UpdateProfileController::class);
+
 });
+
+Route::get('/v1/contents', IndexContentController::class);
+Route::get('/v1/contents/{slug}', ShowContentController::class);
+Route::get('/v1/genres', IndexGenreController::class);

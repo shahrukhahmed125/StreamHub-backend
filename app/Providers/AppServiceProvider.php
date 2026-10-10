@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Contracts\ContentRepositoryInterface;
+use App\Contracts\GenreRepositoryInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Repositories\ContentRepository;
+use App\Repositories\GenreRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ContentRepositoryInterface::class,
             ContentRepository::class,
+        );
+
+        $this->app->bind(
+            GenreRepositoryInterface::class,
+            GenreRepository::class,
         );
     }
 
